@@ -32,6 +32,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Stack is required'],
       },
+      timestamps:false
     })
     
     const UserAttribute = mongoose.model('UserAttribute', userSchema)
