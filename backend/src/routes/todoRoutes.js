@@ -1,13 +1,14 @@
 const express = require('express')
-const router = express.Router()
+const userRoutes = express.Router()
 
 const {
     createUser,
-    getTodoUser,
-    allTodoUser,
+    getSingleUser,
+    getAllUser,
   } = require('../controller/todoController')
-  router.post('/create', createUser)
-  router.post('/users', getTodoUser)
-  router.get('/users/:id', allTodoUser)
+  userRoutes.get('/:id',  getSingleUser)
+  userRoutes.post('/create', createUser)
+  userRoutes.post('/', getAllUser)
+  
  
-module.exports = router
+module.exports = userRoutes

@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
-const TodoUser = require('../model/todoModel');
+const UserAttribute = require('../model/todoModel');
 
 const auth = new google.auth.GoogleAuth({
   keyFile: 'credentials.json',
@@ -16,7 +16,7 @@ const googleSheets = google.sheets({
 
 const createUser = async (req, res) => {
   try {
-    const user = await TodoUser.create(req.body);
+    const user = await UserAttribute.create(req.body);
     console.log(req.body)
     const createSpreasheet =  await googleSheets.spreadsheets.values.append({
       auth,
@@ -43,18 +43,18 @@ console.log("createSpreadsheet is ", createSpreasheet)
   } catch (error) {
     console.error(error);
     res.status(400).json({
-      status: 'failed',
+      status: 'false',
       message: 'not found',
     });
   }
 };
 
-const getTodoUser = async (req, res) => {
+const getSingleUser = async (req, res) => {
   try {
-    const user = await TodoUser.findById(req.params.id);
+    const user = await UserAttribute.findById(req.params.id);
     if (!user) {
       return res.status(404).json({
-        status: 'failed',
+        status: 'false',
         message: 'invalid user',
       });
     }
@@ -62,13 +62,13 @@ const getTodoUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(400).json({
-      status: 'failed',
+      status: 'false',
       message: 'not found',
     });
   }
 };
 
-const allTodoUser = async (req, res) => {
+const getAllUser = async (req, res) => {
   try {
     const rows = await googleSheets.spreadsheets.values.get({
       auth,
@@ -79,7 +79,7 @@ const allTodoUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(400).json({
-      status: 'failed',
+      status: 'false',
       message: 'not found',
     });
   }
@@ -87,6 +87,6 @@ const allTodoUser = async (req, res) => {
 
 module.exports = {
   createUser,
-  getTodoUser,
-  allTodoUser,
+  getSingleUser,
+  getAllUser,
 };
