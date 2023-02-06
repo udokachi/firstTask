@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
 const { GoogleSpreadsheet } = require('google-spreadsheet');
-const UserAttribute = require('../model/todoModel');
+const UserAttribute = require('../model/userModel');
 
 const auth = new google.auth.GoogleAuth({
   keyFile: 'credentials.json',

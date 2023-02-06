@@ -5,7 +5,7 @@ const {
     createUser,
     getSingleUser,
     getAllUser,
-  } = require('../controller/todoController')
+  } = require('../controller/userController')
   userRoutes.get('/:id',  getSingleUser)
   userRoutes.post('/create', createUser)
   userRoutes.post('/', getAllUser)
